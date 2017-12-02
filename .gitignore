@@ -1,5 +1,3 @@
-/*
-!/ewok
 /ewok/ewok_ring_buffer
-!/Onboard-SDK-ROS
-!README.md
+/CMakeLists.txt
+
