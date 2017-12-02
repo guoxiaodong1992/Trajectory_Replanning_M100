@@ -1,0 +1,64 @@
+<launch>
+
+  <arg name="mav_name" default="M100"/>
+  <arg name="dt" value="0.5" />
+  <arg name="num_opt_points" value="7" />
+
+  <arg name="start_x" value="0"/>
+  <arg name="start_y" value="0"/>
+  <arg name="start_z" value="1.2"/>
+  <arg name="start_yaw" value="0"/>
+
+  <arg name="middle_x" value="5.0"/>
+  <arg name="middle_y" value="0"/>
+  <arg name="middle_z" value="1.2"/>
+  <arg name="middle_yaw" value="0"/>
+
+  <arg name="stop_x" value="10"/>
+  <arg name="stop_y" value="0"/>
+  <arg name="stop_z" value="1.2"/>
+  <arg name="stop_yaw" value="0"/>
+
+  <group ns="$(arg mav_name)">
+
+    <node name="quadrotor_trajectory_replanning" pkg="dji_sdk_demo" type="replan_dji" output="screen">
+
+      <param name="start_x" value="$(arg start_x)" />
+      <param name="start_y" value="$(arg start_y)" />
+      <param name="start_z" value="$(arg start_z)" />
+      <param name="start_yaw" value="$(arg start_yaw)" />
+
+      <param name="middle_x" value="$(arg middle_x)" />
+      <param name="middle_y" value="$(arg middle_y)" />
+      <param name="middle_z" value="$(arg middle_z)" />
+      <param name="middle_yaw" value="$(arg middle_yaw)" />
+
+      <param name="stop_x" value="$(arg stop_x)" />
+      <param name="stop_y" value="$(arg stop_y)" />
+      <param name="stop_z" value="$(arg stop_z)" />
+      <param name="stop_yaw" value="$(arg stop_yaw)" />
+    </node>
+
+    <node name="algorithm_trajectory_replanning" pkg="ewok_simulation" type="dji_trajectory_replanning" launch-prefix="gnome-terminal -e" output="screen">
+
+      <param name="dt" value="$(arg dt)" />
+      <param name="num_opt_points" value="$(arg num_opt_points)" />
+
+      <param name="start_x" value="$(arg start_x)" />
+      <param name="start_y" value="$(arg start_y)" />
+      <param name="start_z" value="$(arg start_z)" />
+      <param name="start_yaw" value="$(arg start_yaw)" />
+
+      <param name="middle_x" value="$(arg middle_x)" />
+      <param name="middle_y" value="$(arg middle_y)" />
+      <param name="middle_z" value="$(arg middle_z)" />
+      <param name="middle_yaw" value="$(arg middle_yaw)" />
+
+      <param name="stop_x" value="$(arg stop_x)" />
+      <param name="stop_y" value="$(arg stop_y)" />
+      <param name="stop_z" value="$(arg stop_z)" />
+      <param name="stop_yaw" value="$(arg stop_yaw)" />
+    </node>
+
+  </group>
+</launch>
